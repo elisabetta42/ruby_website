@@ -1,0 +1,12 @@
+<%= render 'layouts/header' %>
+
+      <strong>Ingredients: </strong>
+   <ul> 
+<% @myprods.each do |prod| %>
+      <li>
+      	<%= prod.quantity.to_s + prod.mesure_unit.to_s + ' ' + prod.prod_name.to_s %>
+      </li>
+  
+  <% end %>
+</ul>
+

@@ -1,0 +1,15 @@
+<%= render 'layouts/header' %>
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Recipes:</strong>
+  <%= @recipe_prod.recipes_id %>
+</p>
+
+<p>
+  <strong>Prods:</strong>
+  <%= @recipe_prod.prods_id %>
+</p>
+
+<%= link_to 'Edit', edit_recipe_prod_path(@recipe_prod) %> |
+<%= link_to 'Back', recipe_prods_path %>

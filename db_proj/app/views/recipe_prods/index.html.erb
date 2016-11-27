@@ -1,0 +1,28 @@
+<%= render 'layouts/header' %>
+<h1>Listing recipe_prods</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Recipes</th>
+      <th>Prods</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @recipe_prods.each do |recipe_prod| %>
+      <tr>
+        <td><%= recipe_prod.recipes_id %></td>
+        <td><%= recipe_prod.prods_id %></td>
+        <td><%= link_to 'Show', recipe_prod %></td>
+        <td><%= link_to 'Edit', edit_recipe_prod_path(recipe_prod) %></td>
+        <td><%= link_to 'Destroy', recipe_prod, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Recipe prod', new_recipe_prod_path %>

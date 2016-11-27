@@ -1,0 +1,15 @@
+<%= render 'layouts/header' %>
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Owner user name:</strong>
+  <%= @inventory.owner_user_name %>
+</p>
+
+<p>
+  <strong>Product:</strong>
+  <%= @inventory.product_id %>
+</p>
+
+<%= link_to 'Edit', edit_inventory_path(@inventory) %> |
+<%= link_to 'Back', inventories_path %>

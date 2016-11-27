@@ -1,0 +1,46 @@
+<%= render 'layouts/header' %>
+
+<%= button_to 'what can i make?',possible_recipe_path, :method => :get %>
+<div>
+	<table>
+  <thead>
+    <tr>
+      <th>Prod name</th>
+      <th>Quantity</th>
+      <th>Mesure unit</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+ 
+  <tbody>
+  	<% if @prods.nil? %>
+  	<% else %>
+      <% @prods.each do |prod| %>
+      <% product = Product.find_by(:id => prod.product_id) %>
+      <% if product.nil? %>
+      <% else %>
+      <tr>
+        <td><%= product.prod_name %></td>
+        <td><%= product.quantity %></td>
+        <td><%= product.mesure_unit %></td>
+        <td><%= button_to "delete",  destroy_prod_path(:product_id => product.id)  %></td>
+      </tr>
+      <% end %>
+      <% end %>
+    <% end %>
+      <tr>
+    	<%= form_tag('/user_accounts/add_prod', :method => "get") do %>
+    		<td><%= text_field_tag(:prodname) %></td>
+    		<td><%= number_field_tag(:prod_quantity) %></td>
+    		<td><%= text_field_tag(:prod_mes) %></td>
+    		<td><%= submit_tag("add") %></td>
+		<% end %>
+      </tr>
+  </tbody>
+  
+</table>
+<%= link_to 'Back', '/user_accounts/' + session[:user_id].to_s + '' %>
+</div>
+
+<div>
+</div>

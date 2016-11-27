@@ -1,0 +1,38 @@
+<%= render 'layouts/header' %>
+<% provide(:title, @user_account.username) %>
+<div class="row">
+  <aside class="col-md-4">
+    <section class="user_info">
+      <h1>
+        <%= gravatar_for @user_account %>
+        <%= @user_account.username %>
+      </h1>
+    </section>
+  </aside>
+</div>
+<%= link_to 'Edit', edit_user_account_path(@user_account) %> 
+<% if logged_in? %>
+<%= link_to 'recipies',  recipes_path  %> 
+<%= button_to 'Inventory', user_inventory_path %>
+
+	
+	<% if @recipes.nil? %>
+
+	<% else %>
+	<table>
+		<thead>
+		<tr>
+			<td> <strong> MY RECIPES </strong> </td>
+		</tr>
+
+		<%	@recipes.each do |recipe| %>
+		<tr>
+			<td> <strong> <%=recipe.recipe_name + ': ' %></strong></td>
+			<td><%= link_to 'Show', recipe  %></td>
+		</tr>
+
+		<%end%>
+
+	</table>
+	<% end %>
+<% end %>

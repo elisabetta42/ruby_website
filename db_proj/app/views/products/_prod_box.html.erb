@@ -1,0 +1,40 @@
+
+<div>
+	<table>
+  <thead>
+    <tr>
+      <th>Prod name</th>
+      <th>Quantity</th>
+      <th>Mesure unit</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+  	<% if $temp_prod_list.nil? %>
+    <% else %>
+
+    <% $temp_prod_list.each do |product| %>
+      <tr>
+        <td><%= product.product_name %></td>
+        <td><%= product.quantity %></td>
+        <td><%= product.mesure_unit %></td>
+        <td><%= button_to "delete",  destroy_temp_prod_path(:product_name => product.product_name)  %></td>
+      </tr>
+      <% end %>
+    <% end %>
+    <%= form_tag('add_temp_prod', :method => "get") do %>
+    <td><%= text_field_tag(:prodname) %></td>
+    <td><%= number_field_tag(:prod_quantity) %></td>
+    <td><%= text_field_tag(:prod_mes) %></td>
+    <td><%= submit_tag("add") %></td>
+<% end %>
+    </tr>
+  </tbody>
+</table>
+<%= button_to "submit",  submit_prods_path  %>
+
+</div>
+
+<div>
+</div>

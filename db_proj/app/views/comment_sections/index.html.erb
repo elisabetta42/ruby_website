@@ -1,0 +1,27 @@
+<h1>Listing comment_sections</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Recipe section</th>
+      <th>Section comment</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @comment_sections.each do |comment_section| %>
+      <tr>
+        <td><%= comment_section.recipe_section_id %></td>
+        <td><%= comment_section.section_comment_id %></td>
+        <td><%= link_to 'Show', comment_section %></td>
+        <td><%= link_to 'Edit', edit_comment_section_path(comment_section) %></td>
+        <td><%= link_to 'Destroy', comment_section, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Comment section', new_comment_section_path %>

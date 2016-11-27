@@ -1,0 +1,2 @@
+module RecipeProdsHelper
+end

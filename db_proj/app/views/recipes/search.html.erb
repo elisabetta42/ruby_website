@@ -1,0 +1,44 @@
+<%= render 'layouts/header' %>
+
+<div class="row">
+  <div class="col-md-6 col-md-offset-3">
+    <%= form_tag(search_path, :method => "get") do %>
+    <%= label_tag(:search_text, "Search for:") %>
+    <%= text_field_tag(:search_text) %>
+    <%= submit_tag("Search") %>
+<% end %>
+    <td><%# button_to '+', {:controller => "recipes", :action => "search", :recipe_title => input_text } , :method=>:post  %></td>
+
+<table>
+  <thead>
+    <tr>
+      <th>Recipe name</th>
+      <th>Description</th>
+      <th>Recipe writer</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  
+  <tbody>
+    <% @recipes.each do |recipe| %>
+      <tr>
+        <td><%= recipe.recipe_name %></td>
+        <td><%= recipe.description %></td>
+        <td><%= recipe.recipe_writer %></td>
+        <td><%= link_to 'Show', recipe %></td>
+        <% if recipe.recipe_writer == session[:user_id] %>
+         
+        <td><%= link_to 'Edit', edit_recipe_path(recipe) %></td>
+        <td><%= link_to 'Destroy', recipe, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <% end %>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Recipe', new_recipe_path %>
+</div>
+</div>

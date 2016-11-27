@@ -1,0 +1,89 @@
+<%= render 'layouts/header' %>
+
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Recipe name:</strong>
+  <%= @recipe.recipe_name %>
+</p>
+
+
+
+<% if @prods_id.any? %>
+
+      <strong>Ingredients: </strong>
+   <ul> 
+<% @prods_id.each do |prod_id| %>
+  	<% prod= Product.find_by(:id => prod_id.prods_id) %>
+      <li>
+      	<%= prod.quantity.to_s + prod.mesure_unit.to_s + ' ' + prod.prod_name.to_s %>
+      </li>
+  
+  <% end %>
+</ul>
+<% end %>
+<p>
+  <strong>Description:</strong>
+  <%= @recipe.description %>
+</p>
+
+<p>
+  <strong>Recipe writer:</strong>
+  <%= @recipe.recipe_writer %>
+ </p>
+
+
+<% if @recipe.recipe_writer == session[:user_id] %>
+<%= link_to 'Edit', edit_recipe_path(@recipe) %> |
+<% end %>
+<%= link_to 'Back', recipes_path %>
+<div>
+<table>
+  <thead>
+    <tr>
+      <th><strong>Comments:</strong></th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+  <tbody>
+
+  <% if @comments.nil? %>
+    <th>No Comments</th>
+  <% else %>
+    <% @comments.each do |comment| %>
+    <% com = Comment.find_by(:id => comment.section_comment_id) %>
+    <tr>
+      <td><strong><%=com.comment_user + ': ' %></strong>
+      <%=com.comment_text%></td>
+
+    <% if  session[:user_id] == com.comment_user and com.comment_text != 'comment deleted' %>
+
+    <td><%= button_to "delete",  destroy_comment_path(:comment_id => com.id)  %></td>
+    <% end %>
+    </tr>
+
+       <% end %>
+  <% end %>
+      
+        <%# @recipes.each do |recipe| %>
+      <tr>
+      <%= form_tag(add_comment_path, :method => "get") do %>
+      <td><%= text_field_tag(:comment_text) %></td>
+      <td><%= submit_tag("comment") %></td>
+      <% end %>
+      </tr>
+           
+    
+    
+      
+        <%# if recipe.recipe_writer == session[:user_id] %>
+         
+        <td><%#= link_to 'Edit', edit_recipe_path(recipe) %></td>
+        <td><%#= link_to 'Destroy', recipe, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <%#end %>
+      </tr>
+    
+  </tbody>
+</table>
+
+</div>
